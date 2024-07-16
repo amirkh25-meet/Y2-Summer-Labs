@@ -1,4 +1,4 @@
-def create_youtube_videos(title,description, hashtag):
+def create_youtube_videos(title,description):
 	youtube_video = {}
 	youtube_video["title"] = title
 	youtube_video["description"] = description
@@ -6,12 +6,9 @@ def create_youtube_videos(title,description, hashtag):
 	youtube_video["dislikes"] = 0
 	youtube_video["comments"] = {}
 	youtube_video["hashtag"] = []
-	if youtube_video["hashtag"].len() > 5:
-		return "error"
+	# if youtube_video["hashtag"].len() > 5:
+	# 	return "error"
 	return youtube_video
-
-
-
 
 def like(youtube_video):
 	if "likes" in youtube_video:
@@ -30,6 +27,10 @@ def add_comment(youtube_video, username, comment_text ) :
 
 
 new_youtube_video = create_youtube_videos("QAIS", "NICE VIDEO ")
+
+for x in range(495):
+	new_youtube_video["likes"] += 1
+
 like(new_youtube_video)
 dislike(new_youtube_video)
 add_comment(new_youtube_video, "ABU ELI", "NOT GOOD VIDEO ")
