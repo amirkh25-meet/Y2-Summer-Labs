@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <title>Fortune Teller</title>
+</head>
+<body>
+    <h1 class="welcome-text">Welcome to the Fortune Teller</h1>
+    <h3 class="intro-text">Click the link below to get your fortune! (SCAM ! )</h3>
+    
+    <div class="form-container">
+        <form method="POST" action="/home">
+            <input class="input-field" name="birthday" type="text" placeholder="Type your birth month"/><br>
+            <div class="button-container">
+                <button class="form-button" onclick="changeToFortune()">Tell me my fortune</button><br><br>
+                <a href="/indecisive"><button class="form-button">Indecisive Fortune Teller</button></a>
+            </div>
+        </form>
+    </div>
+</body>
+<script type="text/javascript">
+    function changeToFortune(){
+        window.location="/fortune";
+    }
+</script>
+</html>

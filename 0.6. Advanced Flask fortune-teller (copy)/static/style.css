@@ -1,0 +1,49 @@
+.welcome-text{
+	text-align: center;
+}
+
+body { 
+	background-color: lightblue;
+}
+
+.intro-text{
+	text-align: center;
+}
+
+.input-field{
+	width: 350px;
+	height: 100px;
+	border-radius: 20px;
+	text-align-last: center;
+	font-size: 30px;
+	font-weight: 700px;
+	font-family: Times-New-Roman;
+}
+
+.form-container{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.form-button{
+	margin-top: 10px ;
+	border-radius: 20px;
+	border :0px;
+	width: 250px;
+	height: 50px;
+}
+
+.button-container{
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+}
+
+.fortune-content{
+	font-size: 60px;
+	font-weight: 600px;
+	font-family: Times-New-Roman;
+	color: indianred;
+	text-align: center;
+}
