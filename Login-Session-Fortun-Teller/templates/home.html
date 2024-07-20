@@ -8,15 +8,15 @@
     <title>Fortune Teller</title>
 </head>
 <body>
-    <h1 class="welcome-text">Welcome to the Fortune Teller</h1>
+    <h1 class="welcome-text">Hello {{name}} ! Welcome to the Fortune Teller</h1>
     <h3 class="intro-text">Click the link below to get your fortune! (SCAM ! )</h3>
     
     <div class="form-container">
-        <form method="POST" action="/home">
-            <input class="input-field" name="birthday" type="text" placeholder="Type your birth month"/><br>
+        <form method="POST" action="{{ url_for('fortune', birth_month_length=birth_month_length) }}">
+
+            <!-- <input class="input-field" name="birthday" type="text" placeholder="Type your birth month"/><br> -->
             <div class="button-container">
                 <button class="form-button" onclick="changeToFortune()">Tell me my fortune</button><br><br>
-                <!-- <a href="/indecisive"><button class="form-button">Indecisive Fortune Teller</button></a> -->
             </div>
         </form>
     </div>
