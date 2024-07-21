@@ -5,7 +5,7 @@ app = Flask(__name__, template_folder='templates', static_folder="static")
 app.config['SECRET_KEY'] = "amir"
 
 
-@app.route('/login', methods=["GET","POST"])
+@app.route('/', methods=["GET","POST"])
 def login():
 	if request.method == "GET":
 		return render_template("login_page.html")
@@ -30,7 +30,7 @@ def home():
 		# if birth_date:
 		# 	birth_month_length = len(birth_date)
 		# 	return redirect(url_for('fortune', birth_month_length=birth_month_length))
-		return redirect(url_for('login'))
+		return redirect(url_for(''))
 
 fortunes = ["Your creativity will lead you to great success.",
 			"A thrilling adventure awaits you in the near future.",
@@ -47,12 +47,17 @@ fortunes = ["Your creativity will lead you to great success.",
 
 @app.route('/fortune/<int:birth_month_length>' , methods=["GET","POST"])
 def fortune(birth_month_length):
+
 	if birth_month_length < 10 :
 		random_fortune_text = fortunes[birth_month_length]
+		login_session['fortune'] = random_fortune_text
+	
 		# random_number = random.randint(0,9)
 		return render_template('fortune.html', random_fortune = random_fortune_text, birth_month_length=birth_month_length)
 	else :
-		return render_template('fortune.html', random_fortune="You have a bad fortune")
+		random_fortune_text = "You have a bad fortune"
+		login_session['fortune'] = random_fortune_text
+		return render_template('fortune.html', random_fortune= random_fortune_text)
 
 
 # Run the Flask app
