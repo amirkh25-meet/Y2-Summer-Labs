@@ -24,22 +24,24 @@ auth = firebase.auth()
 
 @app.route("/", methods = ["GET", "POST"])
 def main():
-	if request.method == "GET":
-		return render_template("signup.html")
 
-	email = request.form['email']
-	password = request.form['password']
+		if request.method == "GET":
+			return render_template("signup.html")
 
-	login_session['email'] = email
-	login_session['password'] = password
-	# login_session['quotes'] = []
-	try:
-		login_session['user'] = auth.create_user_with_email_and_password(email, password)
-		login_session['quotes'] = []
-		return redirect(url_for('home'))
-			
-	except:
-		return ("error creating account")
+		email = request.form['email']
+		password = request.form['password']
+
+		login_session['email'] = email
+		login_session['password'] = password
+		# login_session['quotes'] = []
+		try:
+			login_session['user'] = auth.create_user_with_email_and_password(email, password)
+			login_session['quotes'] = []
+			return redirect(url_for('home'))
+				
+		except:
+			return render_template('error.html')
+
 
 
 @app.route("/signout", methods = ["GET", "POST"])
@@ -65,26 +67,37 @@ def signin():
 		except:
 			error = "Authentication failed"
 			print(error)
-			return render_template("signup.html")
+			return render_template('error.html')
 
 
 @app.route("/home", methods = ["GET", "POST"])
 def home():
-	if request.method == "GET":
-		return render_template('home.html')
-	else :
-		quote = request.form['quote']
-		login_session['quotes'].append(quote)
-		login_session.modified = True
-		return render_template('thanks.html')
+	if login_session['user'] != None :
+		if request.method == "GET":
+			return render_template('home.html')
+			print('get req')
+
+		else :
+			quote = request.form['quote']
+			login_session['quotes'].append(quote)
+			login_session.modified = True
+			return render_template('thanks.html')
+	else:
+		return redirect(url_for('main'))
 
 @app.route("/thanks", methods = ["GET", "POST"])
 def thanks():
-	return render_template("thanks.html")
+	if login_session['user'] != None :
+		return render_template("thanks.html")
+	else:
+		return redirect(url_for('main'))
 
 @app.route("/display", methods = ["GET", "POST"])
 def display():
-	return render_template("display.html", quotes=login_session['quotes'])
+	if login_session['user'] != None :
+		return render_template("display.html", quotes=login_session['quotes'])
+	else:
+		return redirect(url_for('main'))
 
 # Run the Flask app
 if __name__ == '__main__':
