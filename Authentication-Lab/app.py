@@ -30,8 +30,8 @@ def main():
 	email = request.form['email']
 	password = request.form['password']
 
-	# login_session['email'] = email
-	# login_session['password'] = password
+	login_session['email'] = email
+	login_session['password'] = password
 	# login_session['quotes'] = []
 	try:
 		login_session['user'] = auth.create_user_with_email_and_password(email, password)
@@ -52,10 +52,16 @@ def signout():
 
 @app.route("/signin", methods = ["GET", "POST"])
 def signin():
+	if request.method == 'GET' :
+		return render_template("signin.html")
+	else :
+		email = request.form['email']
+		password = request.form['password']
 		try:
+
 			login_session['user'] = auth.sign_in_with_email_and_password(email, password)
-			print(auth.create_user_with_email_and_password(email, password))
-			return redirect(url_for('signin'))
+			# print(auth.create_user_with_email_and_password(email, password))
+			return redirect(url_for('home'))
 		except:
 			error = "Authentication failed"
 			print(error)
